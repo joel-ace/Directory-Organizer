@@ -7,6 +7,7 @@ var ImageExtensions = []string{
 	"gif",
 	"bmp",
 	"raw",
+	"heic",
 }
 
 var AudioExtensions = []string{
@@ -17,6 +18,8 @@ var AudioExtensions = []string{
 	"aiff",
 	"aac",
 	"wma",
+	"logicx",
+	"m4a",
 }
 
 var VideoExtensions = []string{
@@ -26,6 +29,7 @@ var VideoExtensions = []string{
 	"mkv",
 	"mpeg",
 	"mpeg",
+	"wmv",
 }
 
 var DocumentExtensions = []string{
@@ -39,6 +43,7 @@ var DocumentExtensions = []string{
 	"xlsx",
 	"ppt",
 	"pptx",
+	"numbers",
 }
 
 var ProgrammingExtensions = []string{
@@ -60,6 +65,7 @@ var ProgrammingExtensions = []string{
 	"odb",
 	"go",
 	"pem",
+	"sql",
 }
 
 var ApplicationExtensions = []string{
@@ -77,4 +83,5 @@ var ZipExtensions = []string{
 	"tgz",
 	"rar",
 	"gzip",
+	"gz",
 }

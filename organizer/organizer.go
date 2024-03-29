@@ -7,6 +7,7 @@ import (
 	"os/user"
 	"path/filepath"
 	"reflect"
+	"slices"
 	"strings"
 )
 
@@ -202,6 +203,19 @@ func GetFileExtensions(file os.DirEntry) string {
 	return extension
 }
 
+// isApplication checks if a file is an application or not
+// based on the list of extensions provided in the ApplicationExtensions list
+//
+// Parameters:
+// - file: the file to be checked
+//
+// Returns:
+// - boolean value that indicates if file is an application or not.
+func isApplication(file os.DirEntry) bool {
+	ext := GetFileExtensions(file)
+	return slices.Contains(ApplicationExtensions, ext)
+}
+
 // incrementPathName generates a new file path by adding a number to the end of a file/directory with duplicate name
 // and increments it to avoid name conflicts.
 //
@@ -310,10 +324,7 @@ func organize(
 	var folder string
 	sourceDirectory := filepath.Join(targetDirectory, file.Name())
 
-	if file.IsDir() {
-		folder = fileCategories.Folders
-		moveDirectory(sourceDirectory, filepath.Join(arrangedFileDirectory, folder, file.Name()))
-	} else {
+	if file.Type().IsRegular() || isApplication(file) {
 		extension := GetFileExtensions(file)
 		extensionToFolderMap := GetSupportedFileExtensionsMap()
 
@@ -326,6 +337,9 @@ func organize(
 		}
 
 		Move(sourceDirectory, filepath.Join(arrangedFileDirectory, folder, file.Name()))
+	} else {
+		folder = fileCategories.Folders
+		moveDirectory(sourceDirectory, filepath.Join(arrangedFileDirectory, folder, file.Name()))
 	}
 }
 
