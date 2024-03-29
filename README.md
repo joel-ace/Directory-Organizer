@@ -5,13 +5,13 @@
 This Go application is designed to help organize your cluttered Desktop or Downloads folder by arranging files into specific directories based on their extensions. It categorizes files into various types such as Images, Audio, Video, Documents, Programming files, Applications, Zip archives, Folders, and Others.
 
 ## Background
-As part of my ongoing journey in learning the Go programming language, I've taken the initiative to apply what I have learned so far to solve a practical problem I have. Despite being aware of existing solutions, I saw this as an opportunity to reinforce my understanding of Go and contribute a solution tailored to my specific needs.
+As part of my ongoing journey in learning the Go programming language, I've taken the initiative to apply what I have learned so far to solve a practical problem I have. Despite being aware of existing solutions, I saw this as an opportunity to reinforce my understanding of Go and contribute a solution tailored to my needs.
 
 #### Before
-
+![Screenshot 2024-03-29 at 1 19 30 PM](https://github.com/joel-ace/Directory-Organizer/assets/23579556/7a088ce1-dda9-4876-9960-1f6e3158e337)
 
 #### After
-
+![Screenshot 2024-03-29 at 2 17 56 PM](https://github.com/joel-ace/Directory-Organizer/assets/23579556/9407a178-a88f-42a2-a4fa-6092fc2cd76e) ![Screenshot 2024-03-29 at 2 18 26 PM](https://github.com/joel-ace/Directory-Organizer/assets/23579556/48d4caf7-5651-41ce-8926-89ec98827a65)
 
 ## Features
 - **Automatic Organization**: The application automatically sorts files into appropriate directories based on their extensions.
