@@ -82,7 +82,7 @@ func GetFileInfo(path string) (os.FileInfo, bool) {
 	return fileInfo, checkDirectoryExistError == nil
 }
 
-// GetHomeDirectory retrieves the path to the user's home directory.
+// GetHomeDirectory gets the path to the user's home directory.
 func GetHomeDirectory() string {
 	homeDir := os.Getenv("HOME")
 
@@ -99,7 +99,7 @@ func GetHomeDirectory() string {
 	return homeDir
 }
 
-// getHomeDirectoriesPathByName retrieves the path to a directory inside the user's home directory using the dir name.
+// getHomeDirectoriesPathByName generates the path to a directory inside the user's home directory using the dir name.
 //
 // Parameters:
 // name - The name of the directory.
@@ -111,7 +111,7 @@ func getHomeDirectoriesPathByName(name string) string {
 	return filepath.Join(HomeDirectory, name)
 }
 
-// GetDesktopDirectory retrieves the path to the Desktop directory.
+// GetDesktopDirectory get the path to the Desktop directory.
 //
 // Returns:
 // - the path to the Desktop directory.
@@ -119,7 +119,7 @@ func GetDesktopDirectory() string {
 	return getHomeDirectoriesPathByName("Desktop")
 }
 
-// GetArrangedFileDirectory retrieves the path to the directory where the arranged files will be moved to.
+// GetArrangedFileDirectory generates the path to the directory where the arranged files will be moved to.
 //
 // Parameters:
 // - targetDirectory: parent directory where the arranged file directory will be created.
@@ -130,7 +130,7 @@ func GetArrangedFileDirectory(targetDirectory string) string {
 	return filepath.Join(targetDirectory, ArrangedFileDirectoryName)
 }
 
-// GetDownloadDirectory retrieves the path to the Downloads directory.
+// GetDownloadDirectory gets the path to the Downloads directory.
 //
 // Returns:
 // - the path to the Downloads directory.
@@ -141,7 +141,7 @@ func GetDownloadDirectory() string {
 // CreateDirectory creates a directory if it does not already exist.
 //
 // Parameters:
-// - path: the path of the directory to create.
+// - path: path of the directory to be created.
 // - permission: the permission mode for the directory.
 func CreateDirectory(path string, permission os.FileMode) {
 	if _, exists := GetFileInfo(path); !exists {
@@ -173,11 +173,11 @@ func ReadDirectory(path string) []os.DirEntry {
 	return files
 }
 
-// CreateDirectories creates all required directories for the supported file extensions.
+// CreateDirectories creates required directories for all file categories.
 //
 // Parameters:
-// - fileCategories: a struct containing the required file categories.
-// - path: the path to the parent directory where the directories will be created.
+// - fileCategories: struct containing the required file categories.
+// - path: path to the parent directory where the directories will be created.
 func CreateDirectories(fileCategories FileDirectories, path string) {
 	categoryTypes := reflect.TypeOf(fileCategories)
 
@@ -189,7 +189,7 @@ func CreateDirectories(fileCategories FileDirectories, path string) {
 	}
 }
 
-// GetFileExtensions retrieves the extension of a file.
+// GetFileExtensions gets the extension of a file.
 //
 // Parameters:
 // - file: the file whose extension is to be retrieved.
@@ -202,13 +202,14 @@ func GetFileExtensions(file os.DirEntry) string {
 	return extension
 }
 
-// incrementPathName adds a number to the end of a file with duplicate name and increments it to avoid name conflicts.
+// incrementPathName generates a new file path by adding a number to the end of a file/directory with duplicate name
+// and increments it to avoid name conflicts.
 //
 // Parameters:
-// - originalPath: the original path of the file.
+// - originalPath: original file/directory path.
 //
 // Returns:
-// - the new path with an incremented suffixed file name.
+// - the new path with an incremented suffixed name.
 func incrementPathName(originalPath string) string {
 	_, err := os.Stat(originalPath)
 	if err == nil {
@@ -232,14 +233,14 @@ func incrementPathName(originalPath string) string {
 // getDirectorySize calculates the size of a directory.
 //
 // Parameters:
-// - dir: the path to the directory.
+// - dir: path to the directory.
 //
 // Returns:
 // - the size of the directory.
 // - error encountered if any.
-func getDirectorySize(dir string) (int64, error) {
+func getDirectorySize(directory string) (int64, error) {
 	var size int64
-	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(directory, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
@@ -255,7 +256,7 @@ func getDirectorySize(dir string) (int64, error) {
 //
 // Parameters:
 // - sourcePath: the current path of the file.
-//   - destinationPath: the new path of the file.
+// - destinationPath: the new path of the file.
 func Move(sourcePath, destinationPath string) {
 	sourceStat, _ := os.Stat(sourcePath)
 	destinationStat, err := os.Stat(destinationPath)
@@ -292,21 +293,22 @@ func moveDirectory(sourcePath string, destinationPath string) {
 	}
 }
 
-// organize organizes the given file according to its type and moves it to the appropriate directory.
+// organize moves the given file to the appropriate directory based on its type.
+// and moves directories to the Folders directory
 //
 // Parameters:
-// - file: the file to be organized.
+// - file: file/directory to be moved.
 // - fileCategories: struct containing the directory names for file categories.
-// - parentDirectory: the parent directory of the file to be moved/organized.
+// - targetDirectory: directory being organized.
 // - arrangedFileDirectory: the directory where organized files will be moved.
 func organize(
 	file os.DirEntry,
 	fileCategories FileDirectories,
-	parentDirectory string,
+	targetDirectory string,
 	arrangedFileDirectory string,
 ) {
 	var folder string
-	sourceDirectory := filepath.Join(parentDirectory, file.Name())
+	sourceDirectory := filepath.Join(targetDirectory, file.Name())
 
 	if file.IsDir() {
 		folder = fileCategories.Folders
@@ -331,8 +333,8 @@ func organize(
 //
 // Parameters:
 // - files: the list of files to be organized.
-// - fileCategories: struct containing the directory names for different file categories.
-// - targetDirectory: the directory containing the files to be organized.
+// - fileCategories: struct containing the directory names for all file categories.
+// - targetDirectory: the directory being organized.
 // - arrangedFileDirectory: the directory where organized files will be moved.
 func OrganizeFiles(
 	files []os.DirEntry,
