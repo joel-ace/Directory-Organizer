@@ -8,10 +8,11 @@ This Go application is designed to help organize your cluttered Desktop or Downl
 As part of my ongoing journey in learning the Go programming language, I've taken the initiative to apply what I have learned so far to solve a practical problem I have. Despite being aware of existing solutions, I saw this as an opportunity to reinforce my understanding of Go and contribute a solution tailored to my needs.
 
 #### Before
-![Screenshot 2024-03-29 at 1 19 30 PM](https://github.com/joel-ace/Directory-Organizer/assets/23579556/7a088ce1-dda9-4876-9960-1f6e3158e337)
+<img src="https://github.com/joel-ace/Directory-Organizer/assets/23579556/7a088ce1-dda9-4876-9960-1f6e3158e337" alt="Screenshot of Desktop before running application" />
 
 #### After
-![Screenshot 2024-03-29 at 2 17 56 PM](https://github.com/joel-ace/Directory-Organizer/assets/23579556/9407a178-a88f-42a2-a4fa-6092fc2cd76e) ![Screenshot 2024-03-29 at 2 18 26 PM](https://github.com/joel-ace/Directory-Organizer/assets/23579556/48d4caf7-5651-41ce-8926-89ec98827a65)
+<img src="https://github.com/joel-ace/Directory-Organizer/assets/23579556/9407a178-a88f-42a2-a4fa-6092fc2cd76e" alt="Screenshot of Desktop after running application" />
+<img src="https://github.com/joel-ace/Directory-Organizer/assets/23579556/b77869ef-c13c-415d-92d9-5ea0db7bfed2" alt="Screenshot of arranged file directories" />
 
 ## Features
 - **Automatic Organization**: The application automatically sorts files into appropriate directories based on their extensions.
